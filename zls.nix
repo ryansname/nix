@@ -1,5 +1,8 @@
 {
   pkgs
+  , version
+  , srcHash
+  , zigVersion
 }:
 
 let
@@ -7,17 +10,17 @@ let
 in
 pkgs.stdenv.mkDerivation rec {
   pname = "zls";
-  version = "5d53f01";
+   inherit version;
   src = pkgs.fetchFromGitHub {
     owner = "zigtools";
     repo = "zls";
     rev = "${version}";
-    hash = "sha256-nn23p+oD0g9mDFcxzc7q8r7bJz8c0qQaaN5IlfFazfY=";
+    hash = "${srcHash}";
   };
   
   nativeBuildInputs = [ 
-    (pkgs_rl.zig { version = "0.11.0-dev.3363+9461ed503"; })
- ];
+    (pkgs_rl.zig { version = "${zigVersion}"; })
+  ];
 
   dontConfigure = true;
 
@@ -25,7 +28,7 @@ pkgs.stdenv.mkDerivation rec {
     package = pkgs_rl.zls;
     command = "zls --version";
     # The output needs to contain the 'version' string without any prefix or suffix.
-    version = "0.11.0";
+  #  version = "0.11.0";
   };
 
   buildPhase = ''

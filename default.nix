@@ -4,6 +4,6 @@
 
 {
 	zig = { version }: import ./zig.nix { inherit pkgs version; };
-	zls = import ./zls.nix { inherit pkgs; };
+	zls = { version, srcHash, zigVersion }: import ./zls.nix { inherit pkgs version srcHash zigVersion; };
 }
 
