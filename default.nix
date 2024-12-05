@@ -3,7 +3,7 @@
 }:
 
 {
-	zig = { version }: import ./zig.nix { inherit pkgs version; };
-	zls = { version, srcHash, zigVersion }: import ./zls.nix { inherit pkgs version srcHash zigVersion; };
+	zig = import ./zig.nix { inherit pkgs; };
+	zls = import ./zls.nix { inherit pkgs; };
 }
 
